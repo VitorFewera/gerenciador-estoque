@@ -13,6 +13,7 @@ export class NavigationService
     // @ Accessors
     // -----------------------------------------------------------------------------------------------------
 
+    // @ts-ignore
     /**
      * Getter for navigation
      */
@@ -33,6 +34,28 @@ export class NavigationService
         return this._httpClient.get<Navigation>('api/common/navigation').pipe(
             tap((navigation) =>
             {
+                navigation.horizontal.push({
+                    title: 'Home',
+                    icon: 'heroicons_solid:home',
+                    link: '/home',
+                    type: 'basic'
+                }),
+                    navigation.horizontal.push({
+                        title: 'Home',
+                        icon: 'heroicons_solid:home',
+                        link: '/home',
+                        type: 'group',
+                        children:[
+                            {
+                                title: 'Home',
+                                icon: 'heroicons_solid:home',
+                                link: '/home',
+                                type: 'basic'
+                            }
+                        ]
+                    })
+
+
                 this._navigation.next(navigation);
             }),
         );

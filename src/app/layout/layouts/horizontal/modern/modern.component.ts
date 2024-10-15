@@ -48,6 +48,7 @@ export class ModernLayoutComponent implements OnInit, OnDestroy
     // @ Accessors
     // -----------------------------------------------------------------------------------------------------
 
+    // @ts-ignore
     /**
      * Getter for current year
      */
