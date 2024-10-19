@@ -75,6 +75,9 @@ export const appRoutes: Route[] = [
         },
         children: [
             {path: 'home', loadChildren: () => import('app/modules/admin/home/home.routes')},
+            {path: 'cadastros', loadChildren: () => import('app/modules/admin/cadastros/cadastros.routes')},
+            {path: 'manutencao', loadChildren: () => import('app/modules/admin/manutencao/manutencao.routes')},
+            {path: 'armazenar', loadChildren: () => import('app/modules/admin/armazenar/armazenar.routes')},
         ]
     }
 ];
