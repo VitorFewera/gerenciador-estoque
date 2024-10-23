@@ -1,0 +1,31 @@
+<div class="z-10 relative flex flex-col items-center">
+    <div class="p-10 w-[60rem] rounded-2xl bg-white ">
+
+        <ng-content></ng-content>
+
+        <div class="flex items-center justify-end mt-5">
+            <button
+                mat-stroked-button
+                type="button"
+                (click)="botaoSair()"
+            >
+                Sair
+            </button>
+            <button
+                class="ml-4"
+                mat-flat-button
+                [color]="'primary'"
+                [disabled]="cadastroForm.disabled"
+                (click)="botaoCadastrar()"
+            >
+                    <span *ngIf="!cadastroForm.disabled">
+                        Cadastrar
+                    </span>
+                <mat-progress-spinner
+                    *ngIf="cadastroForm.disabled"
+                    [diameter]="24"
+                    [mode]="'indeterminate'"></mat-progress-spinner>
+            </button>
+        </div>
+    </div>
+</div>

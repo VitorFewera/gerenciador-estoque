@@ -6,10 +6,6 @@ import { ArmazenarComponent } from './armazenar.component';
 export default [
     {
         path     : '',
-        component: HomeComponent,
-    },
-    {
-        path     : '',
         component: ArmazenarComponent,
     },
 ] as Routes;

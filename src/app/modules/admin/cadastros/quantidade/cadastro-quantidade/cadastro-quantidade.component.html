@@ -1,0 +1,35 @@
+<app-tela-base>
+    <p titulo>Quantidades</p>
+    <app-cadastro-base
+        (cadatrar)="cadastrar()"
+        (sair)="sair()"
+    >
+        <form [formGroup]="cadastroQuantidadeForm">
+            <div class="grid sm:grid-cols-4 gap-6 w-full">
+                <mat-form-field class="sm:col-span-4">
+                    <mat-label>Descricao</mat-label>
+                    <input
+                        id="descricao"
+                        matInput
+                        [formControlName]="'descricao'">
+                    <mat-error *ngIf="cadastroQuantidadeForm.get('descricao').hasError('required')">
+                        Preencha corretamente a descrição.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="sm:col-span-2">
+                    <mat-label>Quantidade</mat-label>
+                    <input
+                        id="name"
+                        type="number"
+                        matInput
+                        placeholder="Quantidade por caixa do produto"
+                        [formControlName]="'quantidade'">
+                    <mat-error *ngIf="cadastroQuantidadeForm.get('quantidade').hasError('required')">
+                        Preencha corretamente o tipo.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </app-cadastro-base>
+
+</app-tela-base>
