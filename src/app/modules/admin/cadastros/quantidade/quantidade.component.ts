@@ -8,21 +8,23 @@ import {MatInputModule} from "@angular/material/input";
 import {Router} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
+import {BotaoAcaoUnicaComponent} from "../../../../layout/common/botao-acao-unica/botao-acao-unica.component";
 
 @Component({
   selector: 'app-quantidade',
   standalone: true,
-  imports: [
-      CommonModule,
-      TelaBaseComponent,
-      CadastroBaseComponent,
-      MatFormFieldModule,
-      ReactiveFormsModule,
-      FormsModule,
-      MatInputModule,
-      MatIconModule,
-      MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        TelaBaseComponent,
+        CadastroBaseComponent,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        BotaoAcaoUnicaComponent
+    ],
   templateUrl: './quantidade.component.html',
   styleUrl: './quantidade.component.scss'
 })
