@@ -11,18 +11,20 @@ import {
 import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-cadastro-base',
   standalone: true,
-  imports: [
-      CommonModule,
-      MatFormFieldModule,
-      MatInputModule,
-      FormsModule,
-      ReactiveFormsModule,
-      MatButtonModule
-  ],
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatProgressSpinnerModule
+    ],
   templateUrl: './cadastro-base.component.html',
   styleUrl: './cadastro-base.component.scss'
 })

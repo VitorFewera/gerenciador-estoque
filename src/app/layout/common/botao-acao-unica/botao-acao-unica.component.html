@@ -1,9 +1,8 @@
-<div class="me-5">
-    <button
-        class="dark bg-[#006060] mt-5 "
-        mat-flat-button
-        (click)="navegar()">
-        <mat-icon class="dark:text-slate-300" [svgIcon]="iconeBotao"></mat-icon>
-        Novo
-    </button>
-</div>
+<button
+    class="text-sky-50 mt-5 "
+    [color]="'primary'"
+    mat-flat-button
+    (click)="navegar()">
+    <mat-icon class="dark:text-slate-300" [svgIcon]="iconeBotao"></mat-icon>
+    {{ nomeBotao }}
+</button>
