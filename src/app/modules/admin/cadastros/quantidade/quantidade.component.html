@@ -1,16 +1,16 @@
 <app-tela-base>
     <p titulo>Quantidades</p>
 
-    <div class="grid mx-auto justify-items-center w-[50rem]" >
-
+    <div class="grid mx-auto justify-items-center w-[50rem]">
         <app-grid-listagem-simples
-            [dataSource]="data"
+            (apagarItem)="deletar($event)"
+            [dataSource]="valorData"
             (editarItem)="navegar()"
             [itensTable]="itensTable"
             [quantidade]="true"
         >
         </app-grid-listagem-simples>
-        <div class="w-full mb-5 mx-auto flex justify-end" >
+        <div class="w-full mb-5 mx-auto flex justify-end">
             <app-botao-acao-unica
                 (acaoUnica)="navegar()"
                 [nomeBotao]="'Adicionar'"
@@ -18,8 +18,4 @@
             </app-botao-acao-unica>
         </div>
     </div>
-
-
-
-<!--</dx-data-grid>-->
 </app-tela-base>

@@ -1,0 +1,29 @@
+{
+  "quantidade": [
+    {
+      "id": 1,
+      "descricao": "Unidade",
+      "quantidade": 1
+    },
+    {
+      "id": 2,
+      "descricao": "Caixa com 10 unidade",
+      "quantidade": 10
+    },
+    {
+      "id": 3,
+      "descricao": "Caixa com 20 unidade",
+      "quantidade": 20
+    },
+    {
+      "id": 4,
+      "descricao": "Caixa com 30 unidade",
+      "quantidade": 30
+    },
+    {
+      "id": "8a21",
+      "descricao": "Teste (não usar) - alterado",
+      "quantidade": 2
+    }
+  ]
+}

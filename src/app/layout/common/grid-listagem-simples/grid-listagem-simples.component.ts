@@ -27,7 +27,7 @@ export class GridListagemSimplesComponent {
         this.editarItem.emit();
     }
     apagar(id){
-        this.apagarItem.emit();
+        this.apagarItem.emit(id);
     }
 
     /**
