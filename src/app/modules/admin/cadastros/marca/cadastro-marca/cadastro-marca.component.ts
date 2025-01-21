@@ -1,65 +1,60 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CommonModule, Location} from '@angular/common';
 import {TelaBaseComponent} from "../../../../../layout/common/tela-base/tela-base.component";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {CadastroBaseComponent} from "../../../../../layout/common/cadastro-base/cadastro-base.component";
-import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
 import {ServiceService} from "../../../../../core/services/service.service";
-import {tap} from "rxjs";
 import {ServiceMensagemService} from "../../../../../core/services/service-mensagem.service";
-import {QuantidadeModel} from "../../../../../core/models/quantidade.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {
+    FormBuilder,
+    FormGroup, NgForm,
+    ReactiveFormsModule,
+    UntypedFormBuilder,
+    UntypedFormGroup,
+    Validators
+} from "@angular/forms";
 import {environment} from "../../../../../../environments/environment";
+import {tap} from "rxjs";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 
-
-
 @Component({
-    selector: 'app-quantidade',
+    selector: 'app-cadastro-marca',
     standalone: true,
-    imports: [
-        CommonModule,
-        TelaBaseComponent,
-        CadastroBaseComponent,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatInputModule,
-        MatIconModule
-    ],
-    templateUrl: './cadastro-quantidade.component.html',
-    styleUrl: './cadastro-quantidade.component.scss'
+    imports: [CommonModule, TelaBaseComponent, CadastroBaseComponent, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule],
+    templateUrl: './cadastro-marca.component.html',
+    styleUrl: './cadastro-marca.component.scss'
 })
-export class CadastroQuantidadeComponent implements OnInit {
+export class CadastroMarcaComponent implements OnInit {
+    @ViewChild('marcaNgForm') marcaNgForm: NgForm;
 
-    cadastroQuantidadeForm: UntypedFormGroup
-
+    marcaForm: UntypedFormGroup;
     idRecuperado: any;
-    URL = environment.quantidade;
+    URL = environment.marca;
     alterando: boolean = false;
 
     constructor(
-        private _formGroup: UntypedFormBuilder,
-        private _route: Router,
-        private _location: Location,
         private _service: ServiceService,
         private _serviceMensagem: ServiceMensagemService,
-        private _activedRoute: ActivatedRoute
+        private _router: Router,
+        private _formBuilder: UntypedFormBuilder,
+        private _activedRoute: ActivatedRoute,
+        private _location: Location
     ) {
     }
 
     ngOnInit() {
-        this.cadastroQuantidadeForm = this._formGroup.group({
+        this.marcaForm = this._formBuilder.group({
             descricao: ['', Validators.required],
-            quantidade: ['', Validators.required]
+            referencia: ['', Validators.required]
         })
 
         this.idRecuperado = this._activedRoute.snapshot.paramMap.get('id');
-        if(this.idRecuperado){
+        if (this.idRecuperado) {
             this.alterando = true;
             let endereco = `${this.URL}${this.idRecuperado}`
-           this.listar(endereco)
+            this.listar(endereco)
         }
     }
 
@@ -67,7 +62,7 @@ export class CadastroQuantidadeComponent implements OnInit {
         this._service.listar(url)
             .subscribe({
                 next: result => {
-                    this.cadastroQuantidadeForm.patchValue(result);
+                    this.marcaForm.patchValue(result);
                 },
                 error: (error) => {
                     console.error('Erro ao carregar dados:', error);
@@ -75,42 +70,45 @@ export class CadastroQuantidadeComponent implements OnInit {
             })
     }
 
-    cadastrar() {
-        if (this.cadastroQuantidadeForm.invalid) {
+    cadastrar(){
+
+        if (this.marcaForm.invalid) {
             this._serviceMensagem.menssagemPreencherDados();
             return;
         }
 
-        this.cadastroQuantidadeForm.disable();
+        this.marcaForm.disable();
 
-        this._service.cadastrar(this.URL, this.cadastroQuantidadeForm.value)
+        this._service.cadastrar(this.URL, this.marcaForm.value)
             .subscribe({
                 next: (cadastro) => {
-                    this._serviceMensagem.mensagemCadastroSucesso('Quantidade');
-                    this._route.navigateByUrl('cadastros/quantidade');
+                    this._serviceMensagem.mensagemCadastroSucesso('Marca');
+                    this._router.navigateByUrl('cadastros/marca');
                 },
                 error: (err) => {
+                    this.marcaForm.enable()
                     this._serviceMensagem.mensagemErro(err);
                 }
             })
     }
 
     alterar(){
-        if (this.cadastroQuantidadeForm.invalid) {
+        if (this.marcaForm.invalid) {
             this._serviceMensagem.menssagemPreencherDados();
             return;
         }
 
-        this.cadastroQuantidadeForm.disable();
+        this.marcaForm.disable();
 
         const url = `${this.URL}${String(this.idRecuperado)}/`
-        this._service.alterar(url, this.cadastroQuantidadeForm.value)
+        this._service.alterar(url, this.marcaForm.value)
             .subscribe({
                 next: (alterar) => {
-                    this._serviceMensagem.mensagemAlterarSucesso('Quantidade');
-                    this._route.navigateByUrl('cadastros/quantidade');
+                    this._serviceMensagem.mensagemAlterarSucesso('Marca');
+                    this._router.navigateByUrl('cadastros/marca');
                 },
                 error: (err) => {
+                    this.marcaForm.enable()
                     console.log(err)
                     this._serviceMensagem.mensagemErro(err);
                 }
@@ -118,6 +116,6 @@ export class CadastroQuantidadeComponent implements OnInit {
     }
 
     sair() {
-       this._service.sair()
+       this._service.sair();
     }
 }

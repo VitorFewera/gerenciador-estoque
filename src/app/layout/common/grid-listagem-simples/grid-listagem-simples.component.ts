@@ -19,12 +19,12 @@ export class GridListagemSimplesComponent {
     @ViewChild('recentTransactionsTable', {read: MatSort}) recentTransactionsTableMatSort: MatSort;
     @Input() dataSource: any;
     @Input() itensTable: string[];
-    @Input() quantidade: boolean;
+    @Input() tipoGrid: number;
     @Output() editarItem: EventEmitter<any> = new EventEmitter();
     @Output() apagarItem: EventEmitter<any> = new EventEmitter();
 
     editar(id){
-        this.editarItem.emit();
+        this.editarItem.emit(id);
     }
     apagar(id){
         this.apagarItem.emit(id);

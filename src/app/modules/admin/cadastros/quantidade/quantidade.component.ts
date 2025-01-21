@@ -18,6 +18,7 @@ import {ServiceService} from "../../../../core/services/service.service";
 import {QuantidadeModel} from "../../../../core/models/quantidade.model";
 import {ServiceMensagemService} from "../../../../core/services/service-mensagem.service";
 import {indexOf} from "lodash";
+import {environment} from "../../../../../environments/environment";
 
 
 @Component({
@@ -45,7 +46,7 @@ import {indexOf} from "lodash";
 export class QuantidadeComponent implements OnInit {
 
     valorData: QuantidadeModel[];
-
+    listarQuantidade = environment.quantidade
     itensTable = ['id', 'descricao', 'quantidade', 'funcoes'];
 
     constructor(
@@ -60,7 +61,7 @@ export class QuantidadeComponent implements OnInit {
     }
 
     listar() {
-        this._service.listar('quantidade')
+        this._service.listar(this.listarQuantidade)
             .subscribe({
                 next: (valor) => {
                     this.valorData = valor
@@ -75,10 +76,10 @@ export class QuantidadeComponent implements OnInit {
     }
 
     deletar(item){
-        console.log(item)
-        this._serviceMensagem.excluir('quantidade', 'a quantidade', item.id)
+        this._serviceMensagem.excluir(this.listarQuantidade, 'a quantidade', item.id)
     }
 
-
-    protected readonly indexOf = indexOf;
+    alterar(valor){
+        this._router.navigateByUrl(`cadastros/quantidade/cadastro-quantidade/${valor.id}`)
+    }
 }

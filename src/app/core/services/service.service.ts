@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
 import {QuantidadeModel} from "../models/quantidade.model";
+import {Location} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +12,28 @@ export class ServiceService {
     API = `http://localhost:3000/`
 
   constructor(
-      private http: HttpClient
+      private http: HttpClient,
+      private _location: Location,
   ) { }
 
-    cadastrar(object, tipo):Observable<QuantidadeModel>{
+    cadastrar(url, object: QuantidadeModel):Observable<any>{
         console.log(object)
-        return this.http.post<QuantidadeModel>(`${this.API}${tipo}`, object);
+        return this.http.post<any>(`${url}`, object);
     }
 
-    listar(tipo): Observable<any> {
-        return this.http.get(`${this.API}${tipo}`);
+    listar(url): Observable<any> {
+        return this.http.get(url);
     }
 
-    excluir(object, tipo): Observable<any> {
-        return this.http.delete(`${this.API}${tipo}/${object}`);
+    excluir(url, object): Observable<any> {
+        return this.http.delete(`${url}${object}`);
     }
 
+    alterar(url, object: string):Observable<any>{
+        return this.http.put<any>(`${url}`, object);
+    }
 
+    sair(){
+        this._location.back()
+    }
 }

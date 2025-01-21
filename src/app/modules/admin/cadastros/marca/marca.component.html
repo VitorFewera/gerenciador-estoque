@@ -1,1 +1,20 @@
-<p>marca works!</p>
+<app-tela-base>
+    <p titulo> Marcas </p>
+    <div class="grid mx-auto justify-items-center w-[50rem]">
+        <app-grid-listagem-simples
+[dataSource]="valorData"
+[tipoGrid]="1"
+[itensTable]="itensTable"
+(apagarItem)="deletar($event)"
+(editarItem)="alterar($event)"
+        >
+        </app-grid-listagem-simples>
+        <div class="w-full mb-5 mx-auto flex justify-end">
+            <app-botao-acao-unica
+                (acaoUnica)="navegar()"
+                [nomeBotao]="'Adicionar'"
+                [iconeBotao]="'mat_solid:add'">
+            </app-botao-acao-unica>
+        </div>
+    </div>
+</app-tela-base>

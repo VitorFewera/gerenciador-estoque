@@ -1,0 +1,45 @@
+<app-tela-base>
+    <p titulo>Marca</p>
+    <app-cadastro-base
+        [cadastroForm]="marcaForm"
+        [alterando]="alterando"
+        (alterar)="alterar()"
+        (cadastrar)="cadastrar()"
+        (sair)="sair()">
+
+    <form [formGroup]="marcaForm" #marcaNgForm="ngForm">
+        <div class="grid sm:grid-cols-4 gap-6 w-full">
+            <mat-form-field class="sm:col-span-4" [subscriptSizing]="'dynamic'">
+                <mat-label>Descrição</mat-label>
+                <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'mat_solid:local_offer'"
+                    matPrefix></mat-icon>
+                <input
+                    id="descricao"
+                    matInput
+                    [formControlName]="'descricao'">
+                <mat-error *ngIf="marcaForm.get('descricao').hasError('required')">
+                    Preencha corretamente a descrição.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="sm:col-span-4">
+                <mat-label>Referência</mat-label>
+                <mat-icon
+                    class="icon-size-5"
+                    [svgIcon]="'mat_outline:link'"
+                    matPrefix></mat-icon>
+                <input
+                    id="name"
+                    type="text"
+                    matInput
+                    placeholder="Site de referência da marca"
+                    [formControlName]="'referencia'">
+                <mat-error *ngIf="marcaForm.get('referencia').hasError('required')">
+                    Preencha corretamente a referência da marca.
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+    </app-cadastro-base>
+</app-tela-base>

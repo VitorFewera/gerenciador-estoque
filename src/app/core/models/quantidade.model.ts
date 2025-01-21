@@ -1,5 +1,5 @@
 export class QuantidadeModel {
-    id: number;
+    id?: number;
     descricao: string;
     quantidade: number;
 }

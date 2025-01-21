@@ -15,12 +15,12 @@
                     mat-header-cell
                     mat-sort-header
                     *matHeaderCellDef>
-                    Código
+                    <span class="grid justify-center">Código</span>
                 </th>
                 <td
                     mat-cell
                     *matCellDef="let table">
-                                <span class="px-6 font-medium text-sm text-secondary  grid justify-center">
+                                <span class="px-6 font-medium text-sm text-secondary grid justify-center">
                                     {{ table.id }}
                                 </span>
                 </td>
@@ -56,7 +56,7 @@
                     *matCellDef="let table">
                     <button
                         mat-icon-button
-                        (click)="editar($event)">
+                        (click)="editar(table)">
                         <mat-icon [svgIcon]="'mat_solid:mode_edit_outline'"></mat-icon>
                     </button>
                     <button
@@ -67,7 +67,25 @@
                 </td>
             </ng-container>
 
-            <ng-container *ngIf="quantidade">
+            <ng-container *ngIf="tipoGrid === 1">
+                <ng-container matColumnDef="referencia">
+                    <th
+                        mat-header-cell
+                        mat-sort-header
+                        *matHeaderCellDef>
+                       <span class="grid justify-center">Referência</span>
+                    </th>
+                    <td
+                        mat-cell
+                        *matCellDef="let table">
+                                <span class="px-6 grid justify-center whitespace-nowrap text-amber-600 no-underline hover:underline">
+                                 <a href="{{table.referencia}}" target="_blank">{{table.descricao }}</a>
+                                </span>
+                    </td>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="tipoGrid === 0">
                 <ng-container matColumnDef="quantidade">
                     <th
                         mat-header-cell
@@ -84,6 +102,7 @@
                     </td>
                 </ng-container>
             </ng-container>
+
 
             <tr
                 mat-header-row

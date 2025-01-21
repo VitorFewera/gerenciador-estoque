@@ -5,9 +5,9 @@
         <app-grid-listagem-simples
             (apagarItem)="deletar($event)"
             [dataSource]="valorData"
-            (editarItem)="navegar()"
+            (editarItem)="alterar($event)"
             [itensTable]="itensTable"
-            [quantidade]="true"
+            [tipoGrid]="0"
         >
         </app-grid-listagem-simples>
         <div class="w-full mb-5 mx-auto flex justify-end">

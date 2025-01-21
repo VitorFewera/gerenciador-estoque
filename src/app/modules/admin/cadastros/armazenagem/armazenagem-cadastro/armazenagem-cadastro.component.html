@@ -1,0 +1,30 @@
+<app-tela-base>
+    <p titulo>Tipos do Item</p>
+    <app-cadastro-base
+        [cadastroForm]="cadastroArmazenagemForm"
+        [alterando]="alterando"
+        (cadastrar)="cadastrar()"
+        (alterar)="alterar()"
+        (sair)="sair()"
+    >
+        <form [formGroup]="cadastroArmazenagemForm">
+            <div class="grid sm:grid-cols-4 gap-6 w-full">
+                <mat-form-field class="sm:col-span-4">
+                    <mat-label>Descricao</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'mat_solid:view_in_ar'"
+                        matPrefix></mat-icon>
+                    <input
+                        id="descricao"
+                        matInput
+                        [formControlName]="'descricao'">
+                    <mat-error *ngIf="cadastroArmazenagemForm.get('descricao').hasError('required')">
+                        Preencha corretamente a descrição.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </app-cadastro-base>
+
+</app-tela-base>

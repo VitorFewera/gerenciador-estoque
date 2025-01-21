@@ -11,6 +11,8 @@
             >
                 Sair
             </button>
+
+            <ng-container *ngIf="!alterando; else alterar">
             <button
                 class="ml-4"
                 mat-flat-button
@@ -26,6 +28,25 @@
                     [diameter]="24"
                     [mode]="'indeterminate'"></mat-progress-spinner>
             </button>
+            </ng-container>
+            <ng-template #alterar>
+                <button
+                    class="ml-4"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [disabled]="cadastroForm.disabled"
+                    (click)="botaoAlterar()"
+                >
+                    <span *ngIf="!cadastroForm.disabled">
+                        Alterar
+                    </span>
+                    <mat-progress-spinner
+                        *ngIf="cadastroForm.disabled"
+                        [diameter]="24"
+                        [mode]="'indeterminate'"></mat-progress-spinner>
+                </button>
+            </ng-template>
+
         </div>
     </div>
 </div>

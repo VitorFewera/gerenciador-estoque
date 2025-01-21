@@ -32,8 +32,10 @@ export class CadastroBaseComponent implements OnInit{
     @ViewChild('cadastroNgForm') cadastroNgForm: NgForm;
 
     @Input() cadastroForm: UntypedFormGroup;
+    @Input() alterando = false;
     @Output() sair = new EventEmitter<any>();
-    @Output() cadatrar = new EventEmitter<any>();
+    @Output() cadastrar = new EventEmitter<any>();
+    @Output() alterar = new EventEmitter<any>();
 
     constructor(
         private _formBuilder: UntypedFormBuilder
@@ -51,7 +53,11 @@ export class CadastroBaseComponent implements OnInit{
     }
 
     botaoCadastrar(){
-        this.cadatrar.emit();
+        this.cadastrar.emit();
+    }
+
+    botaoAlterar(){
+        this.alterar.emit();
     }
 
 

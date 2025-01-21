@@ -1,13 +1,20 @@
 <app-tela-base>
     <p titulo>Quantidades</p>
     <app-cadastro-base
-        (cadatrar)="cadastrar()"
+        [cadastroForm]="cadastroQuantidadeForm"
+        [alterando]="alterando"
+        (cadastrar)="cadastrar()"
+        (alterar)="alterar()"
         (sair)="sair()"
     >
         <form [formGroup]="cadastroQuantidadeForm">
             <div class="grid sm:grid-cols-4 gap-6 w-full">
                 <mat-form-field class="sm:col-span-4">
                     <mat-label>Descricao</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'mat_solid:view_in_ar'"
+                        matPrefix></mat-icon>
                     <input
                         id="descricao"
                         matInput
@@ -18,6 +25,10 @@
                 </mat-form-field>
                 <mat-form-field class="sm:col-span-2">
                     <mat-label>Quantidade</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:circle-stack'"
+                        matPrefix></mat-icon>
                     <input
                         id="name"
                         type="number"

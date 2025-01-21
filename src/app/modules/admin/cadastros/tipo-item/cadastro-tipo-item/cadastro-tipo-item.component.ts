@@ -1,42 +1,28 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {CommonModule, Location} from '@angular/common';
-import {TelaBaseComponent} from "../../../../../layout/common/tela-base/tela-base.component";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {CadastroBaseComponent} from "../../../../../layout/common/cadastro-base/cadastro-base.component";
 import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
+import {TelaBaseComponent} from "../../../../../layout/common/tela-base/tela-base.component";
+import {environment} from "../../../../../../environments/environment";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ServiceService} from "../../../../../core/services/service.service";
-import {tap} from "rxjs";
 import {ServiceMensagemService} from "../../../../../core/services/service-mensagem.service";
-import {QuantidadeModel} from "../../../../../core/models/quantidade.model";
-import {environment} from "../../../../../../environments/environment";
-import {MatIconModule} from "@angular/material/icon";
-
-
 
 @Component({
-    selector: 'app-quantidade',
-    standalone: true,
-    imports: [
-        CommonModule,
-        TelaBaseComponent,
-        CadastroBaseComponent,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatInputModule,
-        MatIconModule
-    ],
-    templateUrl: './cadastro-quantidade.component.html',
-    styleUrl: './cadastro-quantidade.component.scss'
+  selector: 'app-cadastro-tipo-item',
+  standalone: true,
+    imports: [CommonModule, CadastroBaseComponent, FormsModule, MatFormFieldModule, MatIconModule, MatInputModule, TelaBaseComponent, ReactiveFormsModule],
+  templateUrl: './cadastro-tipo-item.component.html',
+  styleUrl: './cadastro-tipo-item.component.scss'
 })
-export class CadastroQuantidadeComponent implements OnInit {
-
-    cadastroQuantidadeForm: UntypedFormGroup
+export class CadastroTipoItemComponent {
+    cadastroTipoItemForm: UntypedFormGroup
 
     idRecuperado: any;
-    URL = environment.quantidade;
+    URL = environment.tipoItem;
     alterando: boolean = false;
 
     constructor(
@@ -50,16 +36,15 @@ export class CadastroQuantidadeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cadastroQuantidadeForm = this._formGroup.group({
+        this.cadastroTipoItemForm = this._formGroup.group({
             descricao: ['', Validators.required],
-            quantidade: ['', Validators.required]
         })
 
         this.idRecuperado = this._activedRoute.snapshot.paramMap.get('id');
         if(this.idRecuperado){
             this.alterando = true;
             let endereco = `${this.URL}${this.idRecuperado}`
-           this.listar(endereco)
+            this.listar(endereco)
         }
     }
 
@@ -67,7 +52,7 @@ export class CadastroQuantidadeComponent implements OnInit {
         this._service.listar(url)
             .subscribe({
                 next: result => {
-                    this.cadastroQuantidadeForm.patchValue(result);
+                    this.cadastroTipoItemForm.patchValue(result);
                 },
                 error: (error) => {
                     console.error('Erro ao carregar dados:', error);
@@ -76,18 +61,18 @@ export class CadastroQuantidadeComponent implements OnInit {
     }
 
     cadastrar() {
-        if (this.cadastroQuantidadeForm.invalid) {
+        if (this.cadastroTipoItemForm.invalid) {
             this._serviceMensagem.menssagemPreencherDados();
             return;
         }
 
-        this.cadastroQuantidadeForm.disable();
+        this.cadastroTipoItemForm.disable();
 
-        this._service.cadastrar(this.URL, this.cadastroQuantidadeForm.value)
+        this._service.cadastrar(this.URL, this.cadastroTipoItemForm.value)
             .subscribe({
                 next: (cadastro) => {
-                    this._serviceMensagem.mensagemCadastroSucesso('Quantidade');
-                    this._route.navigateByUrl('cadastros/quantidade');
+                    this._serviceMensagem.mensagemCadastroSucesso('Tipo do Item');
+                    this._route.navigateByUrl('cadastros/tipo-item');
                 },
                 error: (err) => {
                     this._serviceMensagem.mensagemErro(err);
@@ -96,19 +81,19 @@ export class CadastroQuantidadeComponent implements OnInit {
     }
 
     alterar(){
-        if (this.cadastroQuantidadeForm.invalid) {
+        if (this.cadastroTipoItemForm.invalid) {
             this._serviceMensagem.menssagemPreencherDados();
             return;
         }
 
-        this.cadastroQuantidadeForm.disable();
+        this.cadastroTipoItemForm.disable();
 
         const url = `${this.URL}${String(this.idRecuperado)}/`
-        this._service.alterar(url, this.cadastroQuantidadeForm.value)
+        this._service.alterar(url, this.cadastroTipoItemForm.value)
             .subscribe({
                 next: (alterar) => {
-                    this._serviceMensagem.mensagemAlterarSucesso('Quantidade');
-                    this._route.navigateByUrl('cadastros/quantidade');
+                    this._serviceMensagem.mensagemAlterarSucesso('Tipo do Item');
+                    this._route.navigateByUrl('cadastros/tipo-item');
                 },
                 error: (err) => {
                     console.log(err)
@@ -118,6 +103,6 @@ export class CadastroQuantidadeComponent implements OnInit {
     }
 
     sair() {
-       this._service.sair()
+        this._service.sair()
     }
 }

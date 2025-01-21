@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import Swal from "sweetalert2";
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ServiceService} from "./service.service";
 import {tap} from "rxjs";
@@ -34,34 +33,66 @@ export class ServiceMensagemService {
         });
     }
 
-    mensagemErro(response): void {
-        const err = response.error;
-        err.forEach(obj => {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "top-end",
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                    timer: 5000,
-                    timerProgressBar: false,
-                    didOpen: (toast) => {
-                        toast.onmouseenter = Swal.stopTimer;
-                        toast.onmouseleave = Swal.resumeTimer;
-                    }
-                });
-                Toast.fire({
-                    icon: "error",
-                    title: `${obj.error}`
-                });
+    mensagemAlterarSucesso(tipo) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
             }
-        );
+        });
+        Toast.fire({
+            icon: "success",
+            title: `${tipo} alterada com sucesso!`
+        });
     }
 
-    excluir(tipo: string, mensagem: string, id) {
-        console.log(id, tipo)
+    mensagemErro(response): void {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            showCloseButton: true,
+            timer: 5000,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "error",
+            title: `${response.error}`
+        });
+    }
+
+    menssagemPreencherDados(): void {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: false,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "error",
+            title: "Preencha todos os campos corretamente."
+        });
+    }
+
+    excluir(url: string, mensagem: string, id) {
+        console.log(id, url)
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
-                confirmButton: "rounded-full bg-[#0d9488] text-white",
+                confirmButton: "rounded-full bg-amber-500 text-white",
                 cancelButton: "rounded-full bg-[#9ca3af] border-transparent focus:outline-none"
             },
             buttonsStyling: true
@@ -79,7 +110,7 @@ export class ServiceMensagemService {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                this._service.excluir(id, tipo).subscribe(
+                this._service.excluir(url, id).subscribe(
                     {
                         next: () => {
                             const Toast = Swal.mixin({

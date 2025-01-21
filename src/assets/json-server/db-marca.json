@@ -1,0 +1,24 @@
+{
+  "marca": [
+    {
+      "descricao": "LG",
+      "referencia": "https://www.lg.com/br/promocoes",
+      "id": "1"
+    },
+    {
+      "id": "2",
+      "descricao": "Samsung",
+      "referencia": "https://www.samsung.com/"
+    },
+    {
+      "id": "3",
+      "descricao": "Apple",
+      "referencia": "https://www.apple.com/br"
+    },
+    {
+      "id": "3dcb",
+      "descricao": "Epson",
+      "referencia": "https://epson.com.br/"
+    }
+  ]
+}
