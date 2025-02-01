@@ -1,8 +1,12 @@
 {
   "armazenagem": [
     {
-      "descricao": "Unidadeee",
+      "descricao": "Fileira",
       "id": "a055"
+    },
+    {
+      "id": "ad14",
+      "descricao": "Pallet"
     }
   ]
 }
